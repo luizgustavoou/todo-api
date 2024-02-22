@@ -6,7 +6,7 @@ import com.example.todoapi.enums.Status;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record TodoRecord(@NotBlank String title, @NotBlank String description, @NotNull Status status,
+public record TodoRecordDto(@NotBlank String title, @NotBlank String description, @NotNull Status status,
         @NotNull Priority priority) {
 
 }
