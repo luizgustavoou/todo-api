@@ -3,10 +3,14 @@ package com.example.todoapi.models;
 import java.io.Serializable;
 import java.util.UUID;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import com.example.todoapi.enums.Priority;
 import com.example.todoapi.enums.Status;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.GenerationType;
@@ -23,8 +27,10 @@ public class TodoModel implements Serializable {
 
     private String description;
 
+    @Enumerated(EnumType.STRING)
     private Priority priority;
 
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     // private User user;
