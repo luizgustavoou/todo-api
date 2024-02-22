@@ -1,15 +1,9 @@
-# Duckchat
+# Todo Api
 <!-- license --> 
 
 ## :memo:  Sobre o projeto
 A API consiste de um simples gerenciamento de tarefas para explorar os conhecimentos estudados no ecossistema Spring.
 
-<!-- ## Layout web -->
-
-<!--
-## Modelo conceitual
-![Modelo Conceitual](https://github.com/acenelio/assets/raw/main/sds1/modelo-conceitual.png)
--->
 ## :books: Funcionalidades
 * <b>Autenticação</b>;
 * <b>CRUD de todo</b>;
@@ -22,23 +16,12 @@ A API consiste de um simples gerenciamento de tarefas para explorar os conhecime
 * Spring Web;
 * Spring Data JPA;
 * MySQL Driver;
-  
-## Front end
-* React
-* Redux
-* Tailwind CSS
-* Radix-ui
-* Shadcn-ui
-<!--## Implantação em produção
-- Back end: Heroku
-- Front end web: Netlify
-- Banco de dados: Postgresql -->
 
 ## Infraestrutura
 * Docker;
 
 ## :rocket: Rodando o projeto
-Pré-requisitos: npm / yarn e Docker instalado
+Pré-requisitos: Java 17
 
 ```bash
 # clonar repositório
