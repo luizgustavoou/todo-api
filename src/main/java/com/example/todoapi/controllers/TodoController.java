@@ -31,7 +31,6 @@ public class TodoController {
     public ResponseEntity<TodoModel> save(@RequestBody TodoRecordDto todoRecordDto) {
         var todoModel = new TodoModel();
 
-        System.out.println(todoRecordDto);
         BeanUtils.copyProperties(todoRecordDto, todoModel);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(todoService.save(todoModel));

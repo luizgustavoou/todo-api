@@ -15,7 +15,7 @@ import com.example.todoapi.dtos.LoginResponseRecordDto;
 import com.example.todoapi.dtos.RegisterRecordDto;
 import com.example.todoapi.infra.security.TokenService;
 import com.example.todoapi.models.UserModel;
-import com.example.todoapi.repositories.UserRepository;
+import com.example.todoapi.services.UserService;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -29,14 +29,15 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserRepository repository;
+    private UserService userService;
 
     @Autowired
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationRecordDto data) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
+    public ResponseEntity login(@RequestBody @Valid AuthenticationRecordDto authenticationRecordDto) {
+        var usernamePassword = new UsernamePasswordAuthenticationToken(authenticationRecordDto.email(),
+                authenticationRecordDto.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = tokenService.generateToken((UserModel) auth.getPrincipal());
@@ -45,14 +46,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterRecordDto data) {
-        if (this.repository.findByEmail(data.email()) != null)
+    public ResponseEntity register(@RequestBody @Valid RegisterRecordDto registerRecordDto) {
+        if (this.userService.findByEmail(registerRecordDto.email()) != null)
             return ResponseEntity.badRequest().build();
 
-        String encryptedPassword = passwordEncoder.encode(data.password());
-        UserModel newUser = new UserModel(data.email(), encryptedPassword, data.role());
+        String encryptedPassword = passwordEncoder.encode(registerRecordDto.password());
+        UserModel newUser = new UserModel(registerRecordDto.email(), encryptedPassword, registerRecordDto.role());
 
-        this.repository.save(newUser);
+        this.userService.save(newUser);
 
         return ResponseEntity.ok().build();
     }
