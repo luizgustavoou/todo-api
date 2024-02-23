@@ -4,7 +4,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.todoapi.dtos.AuthenticationRecordDto;
+import com.example.todoapi.dtos.LoginResponseRecordDto;
 import com.example.todoapi.dtos.RegisterRecordDto;
+import com.example.todoapi.infra.security.TokenService;
 import com.example.todoapi.models.UserModel;
 import com.example.todoapi.repositories.UserRepository;
 
@@ -27,6 +29,9 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationRecordDto authenticationDto) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(authenticationDto.email(),
@@ -34,7 +39,9 @@ public class AuthenticationController {
 
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((UserModel) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseRecordDto(token));
 
     }
 
