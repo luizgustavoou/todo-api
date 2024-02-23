@@ -1,6 +1,6 @@
 package com.example.todoapi.enums;
 
-public enum Priority {
+public enum TodoPriority {
     LOW,
     MEDIUM,
     HIGH

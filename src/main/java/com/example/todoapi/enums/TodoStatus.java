@@ -1,6 +1,6 @@
 package com.example.todoapi.enums;
 
-public enum Status {
+public enum TodoStatus {
     PENDING,
     PROGRESS,
     COMPLETED

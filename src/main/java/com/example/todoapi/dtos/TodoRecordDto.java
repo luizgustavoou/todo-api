@@ -1,12 +1,12 @@
 package com.example.todoapi.dtos;
 
-import com.example.todoapi.enums.Priority;
-import com.example.todoapi.enums.Status;
+import com.example.todoapi.enums.TodoPriority;
+import com.example.todoapi.enums.TodoStatus;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record TodoRecordDto(@NotBlank String title, @NotBlank String description, @NotNull Status status,
-        @NotNull Priority priority) {
+public record TodoRecordDto(@NotBlank String title, @NotBlank String description, @NotNull TodoStatus status,
+        @NotNull TodoPriority priority) {
 
 }
