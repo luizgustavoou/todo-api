@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +17,20 @@ import com.example.todoapi.infra.security.TokenService;
 import com.example.todoapi.models.UserModel;
 import com.example.todoapi.repositories.UserRepository;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 @RestController
 @RequestMapping("auth")
-public class AuthenticationController {
+public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserRepository repository;
+
     @Autowired
     private TokenService tokenService;
 
@@ -43,7 +49,7 @@ public class AuthenticationController {
         if (this.repository.findByEmail(data.email()) != null)
             return ResponseEntity.badRequest().build();
 
-        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
+        String encryptedPassword = passwordEncoder.encode(data.password());
         UserModel newUser = new UserModel(data.email(), encryptedPassword, data.role());
 
         this.repository.save(newUser);

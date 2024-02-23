@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.todoapi.repositories.UserRepository;
 
 @Service
-public class AuthorizationService implements UserDetailsService {
+public class AuthService implements UserDetailsService {
 
     @Autowired
     UserRepository repository;
