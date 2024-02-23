@@ -32,6 +32,12 @@ public class UserModel implements UserDetails {
 
     private UserRole role;
 
+    public UserModel(String email, String password, UserRole role) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
