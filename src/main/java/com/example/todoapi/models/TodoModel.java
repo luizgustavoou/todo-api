@@ -9,9 +9,19 @@ import com.example.todoapi.enums.TodoStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import jakarta.persistence.GenerationType;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class TodoModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -32,45 +42,5 @@ public class TodoModel implements Serializable {
     // private User user;
 
     // private Comments comments;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public TodoPriority getPriority() {
-        return priority;
-    }
-
-    public void setPriority(TodoPriority priority) {
-        this.priority = priority;
-    }
-
-    public TodoStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(TodoStatus status) {
-        this.status = status;
-    }
 
 }
