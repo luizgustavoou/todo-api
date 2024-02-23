@@ -16,7 +16,7 @@ import com.example.todoapi.dtos.RegisterRecordDto;
 import com.example.todoapi.infra.security.TokenService;
 import com.example.todoapi.models.UserModel;
 import com.example.todoapi.services.UserService;
-import com.example.todoapi.services.impl.AuthService;
+import com.example.todoapi.services.impl.AuthServiceImpl;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -36,7 +36,7 @@ public class AuthController {
     private TokenService tokenService;
 
     @Autowired
-    AuthService authService;
+    AuthServiceImpl authService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid LoginRecordDto loginRecordDto) {
@@ -55,9 +55,12 @@ public class AuthController {
             return ResponseEntity.badRequest().build();
 
         String encryptedPassword = passwordEncoder.encode(registerRecordDto.password());
-        UserModel newUser = new UserModel(registerRecordDto.email(), encryptedPassword, registerRecordDto.role());
+        UserModel newUser = new UserModel(registerRecordDto.email(),
+                encryptedPassword, registerRecordDto.role());
 
         this.userService.save(newUser);
+
+        // authService.register(registerRecordDto);
 
         return ResponseEntity.ok().build();
     }

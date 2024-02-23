@@ -14,12 +14,13 @@ import com.example.todoapi.dtos.RegisterRecordDto;
 import com.example.todoapi.infra.security.TokenService;
 import com.example.todoapi.models.UserModel;
 import com.example.todoapi.repositories.UserRepository;
+import com.example.todoapi.services.AuthService;
 import com.example.todoapi.services.UserService;
 
 import org.springframework.context.ApplicationContext;
 
 @Service
-public class AuthService implements UserDetailsService {
+public class AuthServiceImpl implements AuthService, UserDetailsService {
 
     @Autowired
     UserRepository repository;
@@ -44,7 +45,7 @@ public class AuthService implements UserDetailsService {
         return repository.findByEmail(username);
     }
 
-    String login(LoginRecordDto loginRecordDto) {
+    public String login(LoginRecordDto loginRecordDto) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(loginRecordDto.email(),
                 loginRecordDto.password());
         var auth = context.getBean(AuthenticationManager.class).authenticate(usernamePassword);
@@ -54,10 +55,10 @@ public class AuthService implements UserDetailsService {
         return token;
     }
 
-    void register(RegisterRecordDto registerRecordDto) {
+    public void register(RegisterRecordDto registerRecordDto) {
         if (userService.findByEmail(registerRecordDto.email()) != null) {
             // fazer algo...
-            throw new RuntimeException("User not found.");
+            throw new RuntimeException("Email already used.");
         }
 
         String encryptedPassword = passwordEncoder.encode(registerRecordDto.password());
