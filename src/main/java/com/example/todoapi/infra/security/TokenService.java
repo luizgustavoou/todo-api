@@ -18,17 +18,19 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
+    private static final String ISSUER = "todo-api";
+
     public String generateToken(UserModel user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
-                    .withIssuer("auth-api")
+                    .withIssuer(ISSUER)
                     .withSubject(user.getEmail())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;
         } catch (JWTCreationException exception) {
-            throw new RuntimeException("Error while generating token", exception);
+            throw new JWTCreationException("Error while generating token", exception);
         }
     }
 
@@ -36,12 +38,12 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("auth-api")
+                    .withIssuer(ISSUER)
                     .build()
                     .verify(token)
                     .getSubject();
         } catch (JWTVerificationException exception) {
-            return "";
+            throw new JWTVerificationException("Token is invalid.");
         }
     }
 
