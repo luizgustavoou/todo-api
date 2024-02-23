@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.todoapi.dtos.TodoRecordDto;
 import com.example.todoapi.models.TodoModel;
 import com.example.todoapi.repositories.TodoRepository;
 import com.example.todoapi.services.TodoService;
