@@ -15,12 +15,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    @Override
     public UserDetails findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    @Override
     @Transactional
     public void save(UserModel userModel) {
         userRepository.save(userModel);

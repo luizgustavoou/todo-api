@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.todoapi.dtos.AuthenticationRecordDto;
+import com.example.todoapi.dtos.LoginRecordDto;
 import com.example.todoapi.dtos.LoginResponseRecordDto;
 import com.example.todoapi.dtos.RegisterRecordDto;
 import com.example.todoapi.infra.security.TokenService;
 import com.example.todoapi.models.UserModel;
 import com.example.todoapi.services.UserService;
+import com.example.todoapi.services.impl.AuthService;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -34,10 +35,13 @@ public class AuthController {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    AuthService authService;
+
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationRecordDto authenticationRecordDto) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(authenticationRecordDto.email(),
-                authenticationRecordDto.password());
+    public ResponseEntity login(@RequestBody @Valid LoginRecordDto loginRecordDto) {
+        var usernamePassword = new UsernamePasswordAuthenticationToken(loginRecordDto.email(),
+                loginRecordDto.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = tokenService.generateToken((UserModel) auth.getPrincipal());

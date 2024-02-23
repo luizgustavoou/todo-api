@@ -9,5 +9,4 @@ import com.example.todoapi.models.UserModel;
 
 public interface UserRepository extends JpaRepository<UserModel, UUID> {
     UserDetails findByEmail(String email);
-
 }
