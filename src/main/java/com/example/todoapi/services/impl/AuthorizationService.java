@@ -10,14 +10,12 @@ import com.example.todoapi.repositories.UserRepository;
 
 @Service
 public class AuthorizationService implements UserDetailsService {
+
     @Autowired
-    UserRepository userRepository;
+    UserRepository repository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return repository.findByEmail(username);
     }
-
-    
-
 }
