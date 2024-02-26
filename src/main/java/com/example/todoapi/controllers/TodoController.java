@@ -9,6 +9,10 @@ import com.example.todoapi.models.UserModel;
 import com.example.todoapi.services.TodoService;
 import com.example.todoapi.services.UserService;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -17,6 +21,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +31,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/todo")
 @RestController
 public class TodoController {
+
     @Autowired
     TodoService todoService;
 
@@ -33,25 +39,20 @@ public class TodoController {
     UserService userService;
 
     @PostMapping
-    public ResponseEntity<Object> save(@RequestBody TodoRecordDto todoRecordDto) {
+    public ResponseEntity<Object> save(@RequestBody TodoRecordDto todoRecordDto,
+            @AuthenticationPrincipal UserModel authUser) {
         var todoModel = new TodoModel();
 
         BeanUtils.copyProperties(todoRecordDto, todoModel);
 
-        Optional<UserModel> user = userService.findOneById(todoRecordDto.user_id());
+        var newTodo = todoService.save(todoModel, authUser.getUserId());
 
-        if (user.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
-
-        }
-
-        todoModel.setUser(user.get());
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(todoService.save(todoModel));
+        return ResponseEntity.status(HttpStatus.CREATED).body(newTodo);
     }
 
     @GetMapping
     public ResponseEntity<List<TodoModel>> findAll() {
+
         return ResponseEntity.status(HttpStatus.OK).body(todoService.findAll());
     }
 

@@ -9,6 +9,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record TodoRecordDto(@NotBlank String title, @NotBlank String description, @NotNull TodoStatus status,
-        @NotNull TodoPriority priority, @NotBlank @NotNull UUID user_id) {
+        @NotNull TodoPriority priority) {
 
 }
