@@ -1,16 +1,21 @@
 package com.example.todoapi.models;
 
 import java.io.Serializable;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.example.todoapi.enums.TodoPriority;
 import com.example.todoapi.enums.TodoStatus;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -29,6 +34,7 @@ public class TodoModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "todo_id")
     private UUID todoId;
 
     private String title;
@@ -41,6 +47,10 @@ public class TodoModel implements Serializable {
     @Enumerated(EnumType.STRING)
     private TodoStatus status;
 
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserModel user;
+    
     // private User user;
 
     // private Comments comments;

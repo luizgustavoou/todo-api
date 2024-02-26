@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.todoapi.dtos.TodoRecordDto;
 import com.example.todoapi.models.TodoModel;
+import com.example.todoapi.models.UserModel;
 import com.example.todoapi.services.TodoService;
+import com.example.todoapi.services.UserService;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,11 +29,23 @@ public class TodoController {
     @Autowired
     TodoService todoService;
 
+    @Autowired
+    UserService userService;
+
     @PostMapping
-    public ResponseEntity<TodoModel> save(@RequestBody TodoRecordDto todoRecordDto) {
+    public ResponseEntity<Object> save(@RequestBody TodoRecordDto todoRecordDto) {
         var todoModel = new TodoModel();
 
         BeanUtils.copyProperties(todoRecordDto, todoModel);
+
+        Optional<UserModel> user = userService.findOneById(todoRecordDto.user_id());
+
+        if (user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+
+        }
+
+        todoModel.setUser(user.get());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(todoService.save(todoModel));
     }

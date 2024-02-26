@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-@Table(name = "users")
+// @Table(name = "users")
 @Entity(name = "users")
 @Getter
 @NoArgsConstructor
@@ -25,12 +25,14 @@ public class UserModel implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private UUID userId;
 
     private String email;
 
     private String password;
 
+    // @Enumerated(EnumType.STRING)
     private UserRole role;
 
     public UserModel(String email, String password, UserRole role) {
