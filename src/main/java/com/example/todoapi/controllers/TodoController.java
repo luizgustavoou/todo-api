@@ -9,10 +9,6 @@ import com.example.todoapi.models.UserModel;
 import com.example.todoapi.services.TodoService;
 import com.example.todoapi.services.UserService;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

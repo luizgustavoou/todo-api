@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.example.todoapi.models.TodoModel;
-import com.example.todoapi.models.UserModel;
 
 import jakarta.transaction.Transactional;
 

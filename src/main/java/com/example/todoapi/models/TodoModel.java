@@ -47,11 +47,9 @@ public class TodoModel implements Serializable {
     @Enumerated(EnumType.STRING)
     private TodoStatus status;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private UserModel user;
-    
-    // private User user;
 
     // private Comments comments;
 
