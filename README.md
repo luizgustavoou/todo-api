@@ -7,7 +7,6 @@ A API consiste de um simples gerenciamento de tarefas para explorar os conhecime
 ## :books: Funcionalidades
 * <b>Autenticação</b>;
 * <b>CRUD de todo</b>;
-* <b>Comentar sobre um todo</b>
 
 # :wrench: Tecnologias utilizadas
 ## Back end
@@ -36,7 +35,8 @@ docker run --name meu-mysql -e MYSQL_ROOT_PASSWORD=banco123 -e MYSQL_DATABASE=to
 ```
 
 ## :soon: Implementação futura
-
+* <b>Comentar sobre um todo</b>;
+* <b>Implementar Websocket para os comentários de todo</b>;
 
 ## :dart: Status do projeto
 Andamento
