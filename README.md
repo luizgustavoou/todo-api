@@ -7,7 +7,7 @@ A API consiste de um simples gerenciamento de tarefas para explorar os conhecime
 ## :books: Funcionalidades
 * <b>Autenticação</b>;
 * <b>CRUD de todo</b>;
-* <b>Comentar sobre um todo</>
+* <b>Comentar sobre um todo</b>
 
 # :wrench: Tecnologias utilizadas
 ## Back end
