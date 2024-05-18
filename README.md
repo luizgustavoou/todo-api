@@ -1,47 +1,46 @@
-# Todo Api
-<!-- license --> 
+# Todo API
 
-## :memo:  Sobre o projeto
-A API consiste de um simples gerenciamento de tarefas para explorar os conhecimentos estudados no ecossistema Spring.
+## :memo: About the Project
+The Todo API is a simple task management system designed to explore the knowledge gained in the Spring ecosystem.
 
-## :books: Funcionalidades
-* <b>Autenticação</b>;
-* <b>CRUD de todo</b>;
+## :books: Features
+* **Authentication**
+* **CRUD for todos**
 
-# :wrench: Tecnologias utilizadas
-## Back end
-* Spring Boot;
-* Spring Validation;
-* Spring Web;
-* Spring Data JPA;
-* MySQL Driver;
+# :wrench: Technologies Used
+## Backend
+* Spring Boot
+* Spring Validation
+* Spring Web
+* Spring Data JPA
+* MySQL Driver
 
-## Infraestrutura
-* Docker;
+## Infrastructure
+* Docker
 
-## :rocket: Rodando o projeto
-Pré-requisitos: Java 17
+## :rocket: Running the Project
+Prerequisites: Java 17
 
 ```bash
-# clonar repositório
+# clone the repository
 git clone https://github.com/luizgustavoou/todo-api.git
 
-# inicialize um container mysql ou instale o mysql localmente na sua máquina
+# initialize a MySQL container or install MySQL locally on your machine
 docker run --name meu-mysql -e MYSQL_ROOT_PASSWORD=banco123 -e MYSQL_DATABASE=todo-api -p 3306:3306 mysql:latest 
 
-# importe o projeto em alguma IDE de preferência
+# import the project into your preferred IDE
 
-# Inicialize o projeto
+# start the project
 ```
 
-## :soon: Implementação futura
-* <b>Comentar sobre um todo</b>;
-* <b>Implementar Websocket para os comentários de todo</b>;
+## :soon: Future Implementations
+* **Comment on a todo**
+* **Implement Websocket for todo comments**
 
-## :dart: Status do projeto
-Andamento
-# Autor
+## :dart: Project Status
+In Progress
 
-Luiz Gustavo de Oliveira Umbelino
-[https://www.linkedin.com/in/wmazoni](https://www.linkedin.com/in/luiz-oliveira-802294294/)https://www.linkedin.com/in/luiz-oliveira-802294294/
+# Author
 
+Luiz Gustavo de Oliveira Umbelino  
+<a href="https://github.com/luizgustavoou">Luiz Gustavo de Oliveira Umbelino</a><br>
